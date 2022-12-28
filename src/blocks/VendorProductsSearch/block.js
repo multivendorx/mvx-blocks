@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls } from '@wordpress/editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -50,14 +50,14 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE+'/vendor-search-products', {
-	title: __( 'MVX: Vendor Product Search', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/vendor-search-products', {
+	title: __( 'MVX: Vendor Product Search', 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="product-search"/>, 
+		src: <MVXIcon icon="product-search" />,
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx', 
-        description: __(
+	category: 'mvx',
+	description: __(
 		'A search form for vendor store products search.',
 		'multivendorx'
 	),
@@ -78,11 +78,11 @@ registerBlockType( NAMESPACE+'/vendor-search-products', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -111,7 +111,7 @@ registerBlockType( NAMESPACE+'/vendor-search-products', {
 		const { attributes, setAttributes } = props;
 		const {
 			vendor_id,
-			block_title,		
+			block_title,
 			block_columns,
 			block_rows,
 			contentVisibility,
@@ -122,13 +122,10 @@ registerBlockType( NAMESPACE+'/vendor-search-products', {
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
 						<RangeControl
-							label={ __(
-								'Product Columns',
-								'multivendorx'
-							) }
+							label={ __( 'Product Columns', 'multivendorx' ) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -137,10 +134,7 @@ registerBlockType( NAMESPACE+'/vendor-search-products', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __(
-								'Product Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Product Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -150,18 +144,18 @@ registerBlockType( NAMESPACE+'/vendor-search-products', {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="product-search" size="24" />}
+				<Placeholder
+					icon={ <MVXIcon icon="product-search" size="24" /> }
 					label={ __( 'Product search', 'multivendorx' ) }
 					className="mvx-block mvx-block-vendor-search-products"
 				>
-					{ __(
-						'Title',
-						'multivendorx'
-					) }
+					{ __( 'Title', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-vendor-search-products__selection">
 						<TextControl
-							placeholder={ __( 'Add some title', 'multivendorx' ) }
+							placeholder={ __(
+								'Add some title',
+								'multivendorx'
+							) }
 							value={ block_title }
 							onChange={ ( value ) => {
 								setAttributes( { block_title: value } );

@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls } from '@wordpress/editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -25,7 +25,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -33,7 +33,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -51,15 +51,15 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE+'/vendors-quick-info', {
-	title: __( 'MVX: Contact Vendor', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/vendors-quick-info', {
+	title: __( 'MVX: Contact Vendor', 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="contact-vendor"/>, 
+		src: <MVXIcon icon="contact-vendor" />,
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx', 
-        description: __(
-		'Adds a contact form on vendor\'s shop page so that customers can contact vendor directly( Admin will also get a copy of the same )',
+	category: 'mvx',
+	description: __(
+		"Adds a contact form on vendor's shop page so that customers can contact vendor directly( Admin will also get a copy of the same )",
 		'multivendorx'
 	),
 	keywords: [
@@ -103,11 +103,11 @@ registerBlockType( NAMESPACE+'/vendors-quick-info', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -146,30 +146,35 @@ registerBlockType( NAMESPACE+'/vendors-quick-info', {
 			contentVisibility,
 		} = attributes;
 
-		const bindVendorsOptionData = [{ value: '', label: 'Select a type...' }];
+		const bindVendorsOptionData = [
+			{ value: '', label: 'Select a type...' },
+		];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function( vendor_data ){
-			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
-		});
+		vendors.map( function ( vendor_data ) {
+			bindVendorsOptionData.push( {
+				value: vendor_data.vendor_id,
+				label: vendor_data.vendor_title,
+			} );
+		} );
 
-		const captaOptionData = [{ value: '', label: 'Select a type...' }];
+		const captaOptionData = [ { value: '', label: 'Select a type...' } ];
 		let capta = mvx_blocks_scripts_data_params.recapta;
-		capta.map( function( vendor_data ) {
-			captaOptionData.push( { value: vendor_data.key, label: vendor_data.title } );
-		});
+		capta.map( function ( vendor_data ) {
+			captaOptionData.push( {
+				value: vendor_data.key,
+				label: vendor_data.title,
+			} );
+		} );
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
 						<RangeControl
-							label={ __(
-								'Product Columns',
-								'multivendorx'
-							) }
+							label={ __( 'Product Columns', 'multivendorx' ) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -178,10 +183,7 @@ registerBlockType( NAMESPACE+'/vendors-quick-info', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __(
-								'Product Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Product Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -192,27 +194,23 @@ registerBlockType( NAMESPACE+'/vendors-quick-info', {
 					</PanelBody>
 					<PanelBody
 						title={ __( 'Content', 'multivendorx' ) }
-						initialOpen = { false }
+						initialOpen={ false }
 					>
 						<ToggleControl
-							label={ __(
-								'Hide from guests: ',
-								'woocommerce'
-							) }
+							label={ __( 'Hide from guests: ', 'woocommerce' ) }
 							help={
 								contentVisibility.form
-									? __(
-											'Form is visible.',
-											'woocommerce'
-									)
-									: __(
-											'Form is hidden.',
-											'woocommerce'
-									)
+									? __( 'Form is visible.', 'woocommerce' )
+									: __( 'Form is hidden.', 'woocommerce' )
 							}
 							checked={ contentVisibility.form }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, form: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										form: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
@@ -225,128 +223,114 @@ registerBlockType( NAMESPACE+'/vendors-quick-info', {
 									? __(
 											'Google recapta is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Google recapta is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.button }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, button: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										button: value,
+									},
+								} )
 							}
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="contact-vendor" size="24" />}
+				<Placeholder
+					icon={ <MVXIcon icon="contact-vendor" size="24" /> }
 					label={ __( 'Contact Vendor', 'multivendorx' ) }
 					className="mvx-block mvx-block-contact-vendor"
 				>
-					{ __(
-						'Title.',
-						'multivendorx'
-					) }
+					{ __( 'Title.', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextControl
-						placeholder={ __( 'Title:', 'multivendorx' ) }
-						value={ block_title }
-						onChange={ ( value ) => {
-							setAttributes( { block_title: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __( 'Title:', 'multivendorx' ) }
+							value={ block_title }
+							onChange={ ( value ) => {
+								setAttributes( { block_title: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Description',
-						'multivendorx'
-					) }
+					{ __( 'Description', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextControl
-						placeholder={ __( 'Description:', 'multivendorx' ) }
-						value={ block_description }
-						onChange={ ( value ) => {
-							setAttributes( { block_description: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __( 'Description:', 'multivendorx' ) }
+							value={ block_description }
+							onChange={ ( value ) => {
+								setAttributes( { block_description: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Submit button text',
-						'multivendorx'
-					) }
+					{ __( 'Submit button text', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextControl
-						placeholder={ __( 'Submit Button Label Text:', 'multivendorx' ) }
-						value={ block_submit_title }
-						onChange={ ( value ) => {
-							setAttributes( { block_submit_title: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __(
+								'Submit Button Label Text:',
+								'multivendorx'
+							) }
+							value={ block_submit_title }
+							onChange={ ( value ) => {
+								setAttributes( { block_submit_title: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Recapta Type',
-						'multivendorx'
-					) }
+					{ __( 'Recapta Type', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<SelectControl
-						value={ recapta_id } 
-						onChange={ ( value ) => {
-							setAttributes( { recapta_id: value } );
-						} }
-						options={ captaOptionData }
-					/>
+						<SelectControl
+							value={ recapta_id }
+							onChange={ ( value ) => {
+								setAttributes( { recapta_id: value } );
+							} }
+							options={ captaOptionData }
+						/>
 					</div>
-					{ __(
-						'Recapta Script',
-						'multivendorx'
-					) }
+					{ __( 'Recapta Script', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextareaControl
-						placeholder={ __( 'Recaptcha Script:', 'multivendorx' ) }
-						value={ recapta_script_v }
-						onChange={ ( value ) => {
-							setAttributes( { recapta_script_v: value } );
-						} }
-					/>
+						<TextareaControl
+							placeholder={ __(
+								'Recaptcha Script:',
+								'multivendorx'
+							) }
+							value={ recapta_script_v }
+							onChange={ ( value ) => {
+								setAttributes( { recapta_script_v: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Site Key',
-						'multivendorx'
-					) }
+					{ __( 'Site Key', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextControl
-						placeholder={ __( 'Site key:', 'multivendorx' ) }
-						value={ site_key_v }
-						onChange={ ( value ) => {
-							setAttributes( { site_key_v: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __( 'Site key:', 'multivendorx' ) }
+							value={ site_key_v }
+							onChange={ ( value ) => {
+								setAttributes( { site_key_v: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Secret Key',
-						'multivendorx'
-					) }
+					{ __( 'Secret Key', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<TextControl
-						placeholder={ __( 'Secret key:', 'multivendorx' ) }
-						value={ secret_key_v }
-						onChange={ ( value ) => {
-							setAttributes( { secret_key_v: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __( 'Secret key:', 'multivendorx' ) }
+							value={ secret_key_v }
+							onChange={ ( value ) => {
+								setAttributes( { secret_key_v: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Select Vendor',
-						'multivendorx'
-					) }
+					{ __( 'Select Vendor', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-contact-vendor__selection">
-					<SelectControl
-						value={ vendor_id } 
-						onChange={ ( value ) => {
-							setAttributes( { vendor_id: value } );
-						} }
-						options={ bindVendorsOptionData }
-					/>
-			
+						<SelectControl
+							value={ vendor_id }
+							onChange={ ( value ) => {
+								setAttributes( { vendor_id: value } );
+							} }
+							options={ bindVendorsOptionData }
+						/>
 					</div>
 				</Placeholder>
 			</Fragment>

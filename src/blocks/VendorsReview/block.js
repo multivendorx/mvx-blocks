@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls } from '@wordpress/editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -50,15 +50,15 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE+'/vendors-review', {
-	title: __( 'MVX: Vendor Review', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/vendors-review', {
+	title: __( 'MVX: Vendor Review', 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="review"/>, 
+		src: <MVXIcon icon="review" />,
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx', 
-        description: __(
-		'Add a vendor review widget on vendor\'s shop page and single product page.',
+	category: 'mvx',
+	description: __(
+		"Add a vendor review widget on vendor's shop page and single product page.",
 		'multivendorx'
 	),
 	keywords: [
@@ -82,11 +82,11 @@ registerBlockType( NAMESPACE+'/vendors-review', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -116,30 +116,32 @@ registerBlockType( NAMESPACE+'/vendors-review', {
 		const {
 			vendor_id,
 			block_title,
-			review_no,			
+			review_no,
 			block_columns,
 			block_rows,
 			contentVisibility,
 		} = attributes;
 
-		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
+		const bindVendorsOptionData = [
+			{ value: '', label: 'Select a Vendor...' },
+		];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function( vendor_data ){
-			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
-		});
+		vendors.map( function ( vendor_data ) {
+			bindVendorsOptionData.push( {
+				value: vendor_data.vendor_id,
+				label: vendor_data.vendor_title,
+			} );
+		} );
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
 						<RangeControl
-							label={ __(
-								'Product Columns',
-								'multivendorx'
-							) }
+							label={ __( 'Product Columns', 'multivendorx' ) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -148,10 +150,7 @@ registerBlockType( NAMESPACE+'/vendors-review', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __(
-								'Product Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Product Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -161,51 +160,48 @@ registerBlockType( NAMESPACE+'/vendors-review', {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="review" size="24" />}
-					label={ __( 'Vendor Review' , 'multivendorx' ) }
+				<Placeholder
+					icon={ <MVXIcon icon="review" size="24" /> }
+					label={ __( 'Vendor Review', 'multivendorx' ) }
 					className="mvx-block mvx-block-vendors-review"
 				>
-					{ __(
-						'Enter title',
-						'multivendorx'
-					) }
+					{ __( 'Enter title', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-vendors-review__selection">
-					<TextControl
-						placeholder={ __( 'Add some title', 'multivendorx' ) }
-						value={ block_title }
-						onChange={ ( value ) => {
-							setAttributes( { block_title: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __(
+								'Add some title',
+								'multivendorx'
+							) }
+							value={ block_title }
+							onChange={ ( value ) => {
+								setAttributes( { block_title: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Enter vendor name',
-						'multivendorx'
-					) }
+					{ __( 'Enter vendor name', 'multivendorx' ) }
 
 					<div className="mvx-block__selection mvx-block-vendors-review__selection">
-					<SelectControl
-						value={ vendor_id } 
-						onChange={ ( value ) => {
-							setAttributes( { vendor_id: value } );
-						} }
-						options={ bindVendorsOptionData }
-					/>
+						<SelectControl
+							value={ vendor_id }
+							onChange={ ( value ) => {
+								setAttributes( { vendor_id: value } );
+							} }
+							options={ bindVendorsOptionData }
+						/>
 					</div>
-					{ __(
-						'Enter number of reviews',
-						'multivendorx'
-					) }
+					{ __( 'Enter number of reviews', 'multivendorx' ) }
 
 					<div className="mvx-block__selection mvx-block-vendors-review__selection">
-					<TextControl
-						placeholder={ __( 'Number of reviews', 'multivendorx' ) }
-						value={ review_no }
-						onChange={ ( value ) => {
-							setAttributes( { review_no: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __(
+								'Number of reviews',
+								'multivendorx'
+							) }
+							value={ review_no }
+							onChange={ ( value ) => {
+								setAttributes( { review_no: value } );
+							} }
+						/>
 					</div>
 				</Placeholder>
 			</Fragment>

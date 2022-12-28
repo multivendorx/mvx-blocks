@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls } from '@wordpress/editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -50,14 +50,14 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE+'/vendor-policies', {
-	title: __( 'MVX: Vendor\'s Policies', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/vendor-policies', {
+	title: __( "MVX: Vendor's Policies", 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="policies"/>, 
+		src: <MVXIcon icon="policies" />,
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx', 
-        description: __(
+	category: 'mvx',
+	description: __(
 		'Displays vendor policies on the vendor shop page.',
 		'multivendorx'
 	),
@@ -78,11 +78,11 @@ registerBlockType( NAMESPACE+'/vendor-policies', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -109,31 +109,33 @@ registerBlockType( NAMESPACE+'/vendor-policies', {
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
 		const {
-			vendor_id,	
-			block_title,		
+			vendor_id,
+			block_title,
 			block_columns,
 			block_rows,
 			contentVisibility,
 		} = attributes;
 
-		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
+		const bindVendorsOptionData = [
+			{ value: '', label: 'Select a Vendor...' },
+		];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function( vendor_data ){
-			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
-		});
+		vendors.map( function ( vendor_data ) {
+			bindVendorsOptionData.push( {
+				value: vendor_data.vendor_id,
+				label: vendor_data.vendor_title,
+			} );
+		} );
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
 						<RangeControl
-							label={ __(
-								'Product Columns',
-								'multivendorx'
-							) }
+							label={ __( 'Product Columns', 'multivendorx' ) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -142,10 +144,7 @@ registerBlockType( NAMESPACE+'/vendor-policies', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __(
-								'Product Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Product Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -156,48 +155,52 @@ registerBlockType( NAMESPACE+'/vendor-policies', {
 					</PanelBody>
 					<PanelBody
 						title={ __( 'Content', 'multivendorx' ) }
-						initialOpen = { false }
+						initialOpen={ false }
 					>
 						<ToggleControl
-							label={ __(
-								'Shipping Policies',
-								'woocommerce'
-							) }
+							label={ __( 'Shipping Policies', 'woocommerce' ) }
 							help={
 								contentVisibility.shipping_policies
 									? __(
 											'Shipping Policies is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Shipping Policies is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.shipping_policies }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, shipping_policies: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										shipping_policies: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Refund Policies',
-								'woocommerce'
-							) }
+							label={ __( 'Refund Policies', 'woocommerce' ) }
 							help={
 								contentVisibility.refund_policies
 									? __(
 											'Refund Policies is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Refund Policies is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.refund_policies }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, refund_policies: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										refund_policies: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
@@ -210,51 +213,52 @@ registerBlockType( NAMESPACE+'/vendor-policies', {
 									? __(
 											'Cancellation/Return/Exchange Policy is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Cancellation/Return/Exchange Policy is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.cancellation_policies }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, cancellation_policies: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										cancellation_policies: value,
+									},
+								} )
 							}
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="policies" size="24" />}
+				<Placeholder
+					icon={ <MVXIcon icon="policies" size="24" /> }
 					label={ __( 'Vendor Plicies', 'multivendorx' ) }
 					className="mvx-block mvx-block-vendor-policies"
 				>
-					{ __(
-						'Enter title',
-						'multivendorx'
-					) }
+					{ __( 'Enter title', 'multivendorx' ) }
 					<div className="mvx-block__selection mvx-block-vendor-policies__selection">
-					<TextControl
-						placeholder={ __( 'Add some title', 'multivendorx' ) }
-						value={ block_title }
-						onChange={ ( value ) => {
-							setAttributes( { block_title: value } );
-						} }
-					/>
+						<TextControl
+							placeholder={ __(
+								'Add some title',
+								'multivendorx'
+							) }
+							value={ block_title }
+							onChange={ ( value ) => {
+								setAttributes( { block_title: value } );
+							} }
+						/>
 					</div>
-					{ __(
-						'Enter vendor name',
-						'multivendorx'
-					) }
+					{ __( 'Enter vendor name', 'multivendorx' ) }
 
 					<div className="mvx-block__selection mvx-block-vendor-policies__selection">
-					<SelectControl
-						value={ vendor_id } 
-						onChange={ ( value ) => {
-							setAttributes( { vendor_id: value } );
-						} }
-						options={ bindVendorsOptionData }
-					/>
-			
+						<SelectControl
+							value={ vendor_id }
+							onChange={ ( value ) => {
+								setAttributes( { vendor_id: value } );
+							} }
+							options={ bindVendorsOptionData }
+						/>
 					</div>
 				</Placeholder>
 			</Fragment>
