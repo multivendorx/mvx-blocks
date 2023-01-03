@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -50,17 +50,14 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE+'/vendor-top-products', {
-	title: __( 'Vendor Top Products', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/vendor-top-products', {
+	title: __( 'Vendor Top Products', 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="products"/>, 
+		src: <MVXIcon icon="products" />,
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx', 
-        description: __(
-		'Display top products of a vendor.',
-		'multivendorx'
-	),
+	category: 'mvx',
+	description: __( 'Display top products of a vendor.', 'multivendorx' ),
 	keywords: [
 		__( 'Top Products', 'multivendorx' ),
 		__( 'MVX Vendor Products', 'multivendorx' ),
@@ -74,11 +71,11 @@ registerBlockType( NAMESPACE+'/vendor-top-products', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -105,31 +102,29 @@ registerBlockType( NAMESPACE+'/vendor-top-products', {
 	 */
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
-		const {
-			vendor_id,			
-			block_columns,
-			block_rows,
-			contentVisibility,
-		} = attributes;
+		const { vendor_id, block_columns, block_rows, contentVisibility } =
+			attributes;
 
-		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
+		const bindVendorsOptionData = [
+			{ value: '', label: 'Select a Vendor...' },
+		];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function( vendor_data ){
-			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
-		});
+		vendors.map( function ( vendor_data ) {
+			bindVendorsOptionData.push( {
+				value: vendor_data.vendor_id,
+				label: vendor_data.vendor_title,
+			} );
+		} );
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
 						<RangeControl
-							label={ __(
-								'Product Columns',
-								'multivendorx'
-							) }
+							label={ __( 'Product Columns', 'multivendorx' ) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -138,10 +133,7 @@ registerBlockType( NAMESPACE+'/vendor-top-products', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __(
-								'Product Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Product Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -152,96 +144,104 @@ registerBlockType( NAMESPACE+'/vendor-top-products', {
 					</PanelBody>
 					<PanelBody
 						title={ __( 'Content', 'multivendorx' ) }
-						initialOpen = { false }
+						initialOpen={ false }
 					>
 						<ToggleControl
-							label={ __(
-								'Product title',
-								'woocommerce'
-							) }
+							label={ __( 'Product title', 'woocommerce' ) }
 							help={
 								contentVisibility.title
 									? __(
 											'Product title is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Product title is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.title }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, title: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										title: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Product price',
-								'woocommerce'
-							) }
+							label={ __( 'Product price', 'woocommerce' ) }
 							help={
 								contentVisibility.price
 									? __(
 											'Product price is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Product price is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.price }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, price: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										price: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Product rating',
-								'woocommerce'
-							) }
+							label={ __( 'Product rating', 'woocommerce' ) }
 							help={
 								contentVisibility.rating
 									? __(
 											'Product rating is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Product rating is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.rating }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, rating: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										rating: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Add to Cart button',
-								'woocommerce'
-							) }
+							label={ __( 'Add to Cart button', 'woocommerce' ) }
 							help={
 								contentVisibility.button
 									? __(
 											'Add to Cart button is visible.',
 											'woocommerce'
-									)
+									  )
 									: __(
 											'Add to Cart button is hidden.',
 											'woocommerce'
-									)
+									  )
 							}
 							checked={ contentVisibility.button }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, button: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										button: value,
+									},
+								} )
 							}
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="products" size="24" />}
+				<Placeholder
+					icon={ <MVXIcon icon="products" size="24" /> }
 					label={ __( 'Vendor Top Products', 'multivendorx' ) }
 					className="mvx-block mvx-block-vendor-top-products"
 				>
@@ -250,14 +250,13 @@ registerBlockType( NAMESPACE+'/vendor-top-products', {
 						'multivendorx'
 					) }
 					<div className="mvx-block__selection mvx-block-vendor-top-products__selection">
-					<SelectControl
-						value={ vendor_id } 
-						onChange={ ( value ) => {
-							setAttributes( { vendor_id: value } );
-						} }
-						options={ bindVendorsOptionData }
-					/>
-			
+						<SelectControl
+							value={ vendor_id }
+							onChange={ ( value ) => {
+								setAttributes( { vendor_id: value } );
+							} }
+							options={ bindVendorsOptionData }
+						/>
 					</div>
 				</Placeholder>
 			</Fragment>

@@ -10,8 +10,8 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n; 
-const { registerBlockType } = wp.blocks; 
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
 import { InspectorControls, PlainText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import {
@@ -23,7 +23,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import { 
+import {
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -31,7 +31,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS, 
+	MAX_ROWS,
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -51,17 +51,14 @@ import MVXIcon from '../../components/icons';
 
 const BLOCK_NAME = 'top-rated-vendors';
 
-registerBlockType( NAMESPACE+'/'+BLOCK_NAME, { 
-	title: __( 'Top Rated Vendors', 'multivendorx' ), 
+registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
+	title: __( 'Top Rated Vendors', 'multivendorx' ),
 	icon: {
-		src: <MVXIcon icon="top-vendor"/>, 
+		src: <MVXIcon icon="top-vendor" />,
 		foreground: MVXICONCOLOR,
-	}, 
-	category: 'mvx', 
-        description: __(
-		'Display marketplace top rated vendors.',
-		'multivendorx'
-	),
+	},
+	category: 'mvx',
+	description: __( 'Display marketplace top rated vendors.', 'multivendorx' ),
 	keywords: [
 		__( 'Top rated vendors', 'multivendorx' ),
 		__( 'MVX Vendors', 'multivendorx' ),
@@ -71,15 +68,15 @@ registerBlockType( NAMESPACE+'/'+BLOCK_NAME, {
 	attributes: {
 		block_title: {
 			type: 'string',
-			default: ''
+			default: '',
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS
+			default: DEFAULT_COLUMNS,
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS
+			default: DEFAULT_ROWS,
 		},
 		contentVisibility: {
 			type: 'object',
@@ -120,9 +117,9 @@ registerBlockType( NAMESPACE+'/'+BLOCK_NAME, {
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen = { true }
+						initialOpen={ true }
 					>
-						{/* <RangeControl
+						{ /* <RangeControl
 							label={ __(
 								'Columns',
 								'multivendorx'
@@ -133,12 +130,9 @@ registerBlockType( NAMESPACE+'/'+BLOCK_NAME, {
 							}
 							min={ MIN_COLUMNS }
 							max={ MAX_COLUMNS }
-						/> */}
+						/> */ }
 						<RangeControl
-							label={ __(
-								'Rows',
-								'multivendorx'
-							) }
+							label={ __( 'Rows', 'multivendorx' ) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -149,117 +143,127 @@ registerBlockType( NAMESPACE+'/'+BLOCK_NAME, {
 					</PanelBody>
 					<PanelBody
 						title={ __( 'Content', 'multivendorx' ) }
-						initialOpen = { false }
+						initialOpen={ false }
 					>
 						<ToggleControl
-							label={ __(
-								'Vendor Banner',
-								'multivendorx'
-							) }
+							label={ __( 'Vendor Banner', 'multivendorx' ) }
 							help={
 								contentVisibility.banner
 									? __(
 											'Vendor banner is visible.',
 											'multivendorx'
-									)
+									  )
 									: __(
 											'Vendor banner is hidden.',
 											'multivendorx'
-									)
+									  )
 							}
 							checked={ contentVisibility.banner }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, banner: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										banner: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Vendor Logo',
-								'multivendorx'
-							) }
+							label={ __( 'Vendor Logo', 'multivendorx' ) }
 							help={
 								contentVisibility.logo
 									? __(
 											'Vendor logo is visible.',
 											'multivendorx'
-									)
+									  )
 									: __(
 											'Vendor logo is hidden.',
 											'multivendorx'
-									)
+									  )
 							}
 							checked={ contentVisibility.logo }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, logo: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										logo: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Vendor Rating',
-								'multivendorx'
-							) }
+							label={ __( 'Vendor Rating', 'multivendorx' ) }
 							help={
 								contentVisibility.rating
 									? __(
 											'Vendor rating is visible.',
 											'multivendorx'
-									)
+									  )
 									: __(
 											'Vendor rating is hidden.',
 											'multivendorx'
-									)
+									  )
 							}
 							checked={ contentVisibility.rating }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, rating: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										rating: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Vendor Title',
-								'multivendorx'
-							) }
+							label={ __( 'Vendor Title', 'multivendorx' ) }
 							help={
 								contentVisibility.banner
 									? __(
 											'Vendor title is visible.',
 											'multivendorx'
-									)
+									  )
 									: __(
 											'Vendor title is hidden.',
 											'multivendorx'
-									)
+									  )
 							}
 							checked={ contentVisibility.title }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, title: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										title: value,
+									},
+								} )
 							}
 						/>
 						<ToggleControl
-							label={ __(
-								'Vendor Social link',
-								'multivendorx'
-							) }
+							label={ __( 'Vendor Social link', 'multivendorx' ) }
 							help={
 								contentVisibility.social_link
 									? __(
 											'Vendor social link is visible.',
 											'multivendorx'
-									)
+									  )
 									: __(
 											'Vendor social link is hidden.',
 											'multivendorx'
-									)
+									  )
 							}
 							checked={ contentVisibility.social_link }
 							onChange={ ( value ) =>
-								setAttributes( { contentVisibility: { ...contentVisibility, social_link: value } } )
+								setAttributes( {
+									contentVisibility: {
+										...contentVisibility,
+										social_link: value,
+									},
+								} )
 							}
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder 
-					icon= { <MVXIcon icon="top-vendor" size="24" />}
+				<Placeholder
+					icon={ <MVXIcon icon="top-vendor" size="24" /> }
 					label={ __( 'Top Rated Vendors', 'multivendorx' ) }
 					className="mvx-block mvx-block-top-rated-vendors"
 				>
@@ -269,13 +273,15 @@ registerBlockType( NAMESPACE+'/'+BLOCK_NAME, {
 					) }
 					<div className="mvx-block__selection mvx-block-top-rated-vendors__selection">
 						<TextControl
-							placeholder={ __( 'Add some title', 'multivendorx' ) }
+							placeholder={ __(
+								'Add some title',
+								'multivendorx'
+							) }
 							value={ block_title }
 							onChange={ ( value ) => {
 								setAttributes( { block_title: value } );
 							} }
 						/>
-			
 					</div>
 				</Placeholder>
 			</Fragment>
