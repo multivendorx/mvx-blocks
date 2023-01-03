@@ -10,9 +10,9 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-import { InspectorControls } from '@wordpress/editor';
+const { __ } = wp.i18n; 
+const { registerBlockType } = wp.blocks; 
+import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import {
+import { 
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS,
+	MAX_ROWS, 
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -52,14 +52,14 @@ import MVXIcon from '../../components/icons';
 
 const BLOCK_NAME = 'vendor-on-sale-products';
 
-registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
-	title: __( "MVX: Vendor's On Sale Product", 'multivendorx' ),
+registerBlockType( NAMESPACE+'/'+BLOCK_NAME, { 
+	title: __( 'MVX: Vendor\'s On Sale Product', 'multivendorx' ), 
 	icon: {
-		src: <MVXIcon icon="on-sale" />,
+		src: <MVXIcon icon="on-sale"/>, 
 		foreground: MVXICONCOLOR,
-	},
-	category: 'mvx',
-	description: __(
+	}, 
+	category: 'mvx', 
+        description: __(
 		'Displays a list of vendor on sale products on the vendor shop page.',
 		'multivendorx'
 	),
@@ -71,23 +71,24 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 	attributes: {
 		block_title: {
 			type: 'string',
-			default: '',
+			default: ''
 		},
 		no_of_product: {
 			type: 'string',
-			default: '',
+			default: ''
 		},
 		vendor_id: {
 			type: 'string',
-			default: '',
+			default: ''
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS,
+			default: DEFAULT_ROWS
 		},
 		contentVisibility: {
 			type: 'object',
-			default: {},
+			default: {
+			},
 		},
 	},
 	example: {},
@@ -111,29 +112,27 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 			block_rows,
 			contentVisibility,
 			preview,
-			vendor_id,
+			vendor_id
 		} = attributes;
 
-		const bindVendorsOptionData = [
-			{ value: '', label: 'Select a Vendor...' },
-		];
+		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function ( vendor_data ) {
-			bindVendorsOptionData.push( {
-				value: vendor_data.vendor_id,
-				label: vendor_data.vendor_title,
-			} );
-		} );
+		vendors.map( function( vendor_data ){
+			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
+		});
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen={ true }
+						initialOpen = { true }
 					>
 						<RangeControl
-							label={ __( 'Rows', 'multivendorx' ) }
+							label={ __(
+								'Rows',
+								'multivendorx'
+							) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -143,41 +142,44 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder
-					icon={ <MVXIcon icon="on-sale" size="24" /> }
+				<Placeholder 
+					icon= { <MVXIcon icon="on-sale" size="24" />}
 					label={ __( 'Vendor On sell Product', 'multivendorx' ) }
 					className="mvx-block mvx-block-on-sale"
 				>
-					{ __( 'Title', 'multivendorx' ) }
+					{ __(
+						'Title',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-on-sale__selection">
 						<TextControl
-							placeholder={ __(
-								'Add some title',
-								'multivendorx'
-							) }
+							placeholder={ __( 'Add some title', 'multivendorx' ) }
 							value={ block_title }
 							onChange={ ( value ) => {
 								setAttributes( { block_title: value } );
 							} }
 						/>
 					</div>
-					{ __( 'Enter No of products', 'multivendorx' ) }
+					{ __(
+						'Enter No of products',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-on-sale__selection">
 						<TextControl
-							placeholder={ __(
-								'Number of products to show',
-								'multivendorx'
-							) }
+							placeholder={ __( 'Number of products to show', 'multivendorx' ) }
 							value={ no_of_product }
 							onChange={ ( value ) => {
 								setAttributes( { no_of_product: value } );
 							} }
 						/>
 					</div>
-					{ __( 'Select vendor', 'multivendorx' ) }
+					{ __(
+						'Select vendor',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-on-sale__selection">
 						<SelectControl
-							value={ vendor_id }
+							value={ vendor_id } 
 							onChange={ ( value ) => {
 								setAttributes( { vendor_id: value } );
 							} }

@@ -10,9 +10,9 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-import { InspectorControls } from '@wordpress/editor';
+const { __ } = wp.i18n; 
+const { registerBlockType } = wp.blocks; 
+import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import {
+import { 
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS,
+	MAX_ROWS, 
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -52,14 +52,14 @@ import MVXIcon from '../../components/icons';
 
 const BLOCK_NAME = 'coupon-vendors';
 
-registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
-	title: __( "MVX: Vendor's Coupons", 'multivendorx' ),
+registerBlockType( NAMESPACE+'/'+BLOCK_NAME, { 
+	title: __( 'MVX: Vendor\'s Coupons', 'multivendorx' ), 
 	icon: {
-		src: <MVXIcon icon="coupon" />,
+		src: <MVXIcon icon="coupon"/>, 
 		foreground: MVXICONCOLOR,
-	},
-	category: 'mvx',
-	description: __(
+	}, 
+	category: 'mvx', 
+        description: __(
 		'Displays coupons added by the vendor on the vendor shop page.',
 		'multivendorx'
 	),
@@ -71,19 +71,20 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 	attributes: {
 		block_title: {
 			type: 'string',
-			default: '',
+			default: ''
 		},
 		vendor_id: {
 			type: 'string',
-			default: '',
+			default: ''
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS,
+			default: DEFAULT_ROWS
 		},
 		contentVisibility: {
 			type: 'object',
-			default: {},
+			default: {
+			},
 		},
 	},
 	example: {},
@@ -106,29 +107,27 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 			block_rows,
 			contentVisibility,
 			preview,
-			vendor_id,
+			vendor_id
 		} = attributes;
 
-		const bindVendorsOptionData = [
-			{ value: '', label: 'Select a Vendor...' },
-		];
+		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function ( vendor_data ) {
-			bindVendorsOptionData.push( {
-				value: vendor_data.vendor_id,
-				label: vendor_data.vendor_title,
-			} );
-		} );
+		vendors.map( function( vendor_data ){
+			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
+		});
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen={ true }
+						initialOpen = { true }
 					>
 						<RangeControl
-							label={ __( 'Rows', 'multivendorx' ) }
+							label={ __(
+								'Rows',
+								'multivendorx'
+							) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -138,33 +137,36 @@ registerBlockType( NAMESPACE + '/' + BLOCK_NAME, {
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder
-					icon={ <MVXIcon icon="coupon" size="24" /> }
+				<Placeholder 
+					icon= { <MVXIcon icon="coupon" size="24" />}
 					label={ __( 'Vendor Coupons', 'multivendorx' ) }
 					className="mvx-block mvx-block-coupon-vendors"
 				>
-					{ __( 'Title', 'multivendorx' ) }
+					{ __(
+						'Title',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-coupon-vendors__selection">
 						<TextControl
-							placeholder={ __(
-								'Add some title',
-								'multivendorx'
-							) }
+							placeholder={ __( 'Add some title', 'multivendorx' ) }
 							value={ block_title }
 							onChange={ ( value ) => {
 								setAttributes( { block_title: value } );
 							} }
 						/>
 					</div>
-					{ __( 'Select Vendor', 'multivendorx' ) }
+					{ __(
+						'Select Vendor',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-coupon-vendors__selection">
-						<SelectControl
-							value={ vendor_id }
-							onChange={ ( value ) => {
-								setAttributes( { vendor_id: value } );
-							} }
-							options={ bindVendorsOptionData }
-						/>
+					<SelectControl
+						value={ vendor_id } 
+						onChange={ ( value ) => {
+							setAttributes( { vendor_id: value } );
+						} }
+						options={ bindVendorsOptionData }
+					/>
 					</div>
 				</Placeholder>
 			</Fragment>

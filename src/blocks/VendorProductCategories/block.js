@@ -10,9 +10,9 @@ import './style.scss';
 /**
  * External dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-import { InspectorControls } from '@wordpress/editor';
+const { __ } = wp.i18n; 
+const { registerBlockType } = wp.blocks; 
+import { InspectorControls } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 
 // load MVX Components
-import {
+import { 
 	NAMESPACE,
 	MVXICONCOLOR,
 	DEFAULT_COLUMNS,
@@ -32,7 +32,7 @@ import {
 	MAX_COLUMNS,
 	DEFAULT_ROWS,
 	MIN_ROWS,
-	MAX_ROWS,
+	MAX_ROWS, 
 } from '../../utils/constants';
 import MVXIcon from '../../components/icons';
 
@@ -50,14 +50,14 @@ import MVXIcon from '../../components/icons';
  *                             registered; otherwise `undefined`.
  */
 
-registerBlockType( NAMESPACE + '/vendor-products-catagory', {
-	title: __( "MVX: Vendor's Product Categories", 'multivendorx' ),
+registerBlockType( NAMESPACE+'/vendor-products-catagory', {
+	title: __( 'MVX: Vendor\'s Product Categories', 'multivendorx' ), 
 	icon: {
-		src: <MVXIcon icon="product-categories" />,
+		src: <MVXIcon icon="product-categories"/>, 
 		foreground: MVXICONCOLOR,
 	},
-	category: 'mvx',
-	description: __(
+	category: 'mvx', 
+        description: __(
 		'Displays a list of product categories added by the vendor on the vendor shop page.',
 		'multivendorx'
 	),
@@ -78,11 +78,11 @@ registerBlockType( NAMESPACE + '/vendor-products-catagory', {
 		},
 		block_columns: {
 			type: 'number',
-			default: DEFAULT_COLUMNS,
+			default: DEFAULT_COLUMNS
 		},
 		block_rows: {
 			type: 'number',
-			default: DEFAULT_ROWS,
+			default: DEFAULT_ROWS
 		},
 		contentVisibility: {
 			type: 'object',
@@ -109,32 +109,30 @@ registerBlockType( NAMESPACE + '/vendor-products-catagory', {
 		const { attributes, setAttributes } = props;
 		const {
 			vendor_id,
-			block_title,
+			block_title,		
 			block_columns,
 			block_rows,
 			contentVisibility,
 		} = attributes;
 
-		const bindVendorsOptionData = [
-			{ value: '', label: 'Select a Vendor...' },
-		];
+		const bindVendorsOptionData = [{ value: '', label: 'Select a Vendor...' }];
 		let vendors = mvx_blocks_scripts_data_params.allVendors;
-		vendors.map( function ( vendor_data ) {
-			bindVendorsOptionData.push( {
-				value: vendor_data.vendor_id,
-				label: vendor_data.vendor_title,
-			} );
-		} );
+		vendors.map( function( vendor_data ){
+			bindVendorsOptionData.push( { value: vendor_data.vendor_id, label: vendor_data.vendor_title } );
+		});
 
 		return (
 			<Fragment>
 				<InspectorControls key="inspector">
 					<PanelBody
 						title={ __( 'Layout', 'multivendorx' ) }
-						initialOpen={ true }
+						initialOpen = { true }
 					>
 						<RangeControl
-							label={ __( 'Product Columns', 'multivendorx' ) }
+							label={ __(
+								'Product Columns',
+								'multivendorx'
+							) }
 							value={ block_columns }
 							onChange={ ( value ) =>
 								setAttributes( { block_columns: value } )
@@ -143,7 +141,10 @@ registerBlockType( NAMESPACE + '/vendor-products-catagory', {
 							max={ MAX_COLUMNS }
 						/>
 						<RangeControl
-							label={ __( 'Product Rows', 'multivendorx' ) }
+							label={ __(
+								'Product Rows',
+								'multivendorx'
+							) }
 							value={ block_rows }
 							onChange={ ( value ) =>
 								setAttributes( { block_rows: value } )
@@ -154,83 +155,82 @@ registerBlockType( NAMESPACE + '/vendor-products-catagory', {
 					</PanelBody>
 					<PanelBody
 						title={ __( 'Content', 'multivendorx' ) }
-						initialOpen={ false }
+						initialOpen = { false }
 					>
 						<ToggleControl
-							label={ __( 'Show product counts', 'woocommerce' ) }
+							label={ __(
+								'Show product counts',
+								'woocommerce'
+							) }
 							help={
 								contentVisibility.count
 									? __(
 											'Product count is visible.',
 											'woocommerce'
-									  )
+									)
 									: __(
 											'Product count is hidden.',
 											'woocommerce'
-									  )
+									)
 							}
 							checked={ contentVisibility.count }
 							onChange={ ( value ) =>
-								setAttributes( {
-									contentVisibility: {
-										...contentVisibility,
-										count: value,
-									},
-								} )
+								setAttributes( { contentVisibility: { ...contentVisibility, count: value } } )
 							}
 						/>
 						<ToggleControl
-							label={ __( 'Show hierarchy', 'woocommerce' ) }
+							label={ __(
+								'Show hierarchy',
+								'woocommerce'
+							) }
 							help={
 								contentVisibility.hierarchical
 									? __(
 											'Hierarchy is visible.',
 											'woocommerce'
-									  )
+									)
 									: __(
 											'Hierarchy is hidden.',
 											'woocommerce'
-									  )
+									)
 							}
 							checked={ contentVisibility.hierarchical }
 							onChange={ ( value ) =>
-								setAttributes( {
-									contentVisibility: {
-										...contentVisibility,
-										hierarchical: value,
-									},
-								} )
+								setAttributes( { contentVisibility: { ...contentVisibility, hierarchical: value } } )
 							}
 						/>
 					</PanelBody>
 				</InspectorControls>
-				<Placeholder
-					icon={ <MVXIcon icon="product-categories" size="24" /> }
+				<Placeholder 
+					icon= { <MVXIcon icon="product-categories" size="24" />}
 					label={ __( 'Vendor Product Categories', 'multivendorx' ) }
 					className="mvx-block mvx-block-vendor-products-catagory"
 				>
-					{ __( 'Enter title', 'multivendorx' ) }
+					{ __(
+						'Enter title',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-vendor-products-catagory__selection">
-						<TextControl
-							placeholder={ __(
-								'Add some title',
-								'multivendorx'
-							) }
-							value={ block_title }
-							onChange={ ( value ) => {
-								setAttributes( { block_title: value } );
-							} }
-						/>
+					<TextControl
+						placeholder={ __( 'Add some title', 'multivendorx' ) }
+						value={ block_title }
+						onChange={ ( value ) => {
+							setAttributes( { block_title: value } );
+						} }
+					/>
 					</div>
-					{ __( 'Enter vendor name', 'multivendorx' ) }
+					{ __(
+						'Enter vendor name',
+						'multivendorx'
+					) }
 					<div className="mvx-block__selection mvx-block-vendor-products-catagory__selection">
-						<SelectControl
-							value={ vendor_id }
-							onChange={ ( value ) => {
-								setAttributes( { vendor_id: value } );
-							} }
-							options={ bindVendorsOptionData }
-						/>
+					<SelectControl
+						value={ vendor_id } 
+						onChange={ ( value ) => {
+							setAttributes( { vendor_id: value } );
+						} }
+						options={ bindVendorsOptionData }
+					/>
 					</div>
 				</Placeholder>
 			</Fragment>
